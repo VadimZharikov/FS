@@ -28,8 +28,8 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
-    <Folder Include="MIddleware\" />
+	  <Folder Include="Models\" />
+	  <Folder Include="Middleware\" />
     <Folder Include="Mapper\" />
   </ItemGroup>
 
