@@ -1,6 +1,6 @@
 @FS_HostAddress = http://localhost:5114
 
-GET {{FS_HostAddress}}/weatherforecast/
+GET {{FS_HostAddress}}/FilmSearch/
 Accept: application/json
 
 ###
