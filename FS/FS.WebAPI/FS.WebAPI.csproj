@@ -33,4 +33,8 @@
     <Folder Include="Mapper\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FS.BLL\FS.BLL.csproj" />
+  </ItemGroup>
+
 </Project>
