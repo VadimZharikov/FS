@@ -18,9 +18,9 @@ namespace FS.DAL.Repositories
             return await _dbSet.AsNoTracking().ToListAsync();
         }
 
-        public IEnumerable<TEntity> Get(Func<TEntity, bool> predicate)
+        public async Task<IEnumerable<TEntity>> Get(Func<TEntity, ValueTask<bool>> predicate)
         {
-            return _dbSet.Where(predicate).ToList();
+            return await _dbSet.ToAsyncEnumerable().WhereAwait(predicate).ToListAsync();
         }
 
         public async Task<TEntity?> GetById(int id)

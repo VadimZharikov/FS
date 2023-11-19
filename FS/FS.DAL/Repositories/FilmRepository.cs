@@ -24,7 +24,10 @@ namespace FS.DAL.Repositories
 
         public async Task<FilmEntity> GetFilm(int id)
         {
-            var film = await _context.Films.FindAsync(id);
+            var film = await _context.Films
+                .Include(x => x.Reviews)
+                .Include(x => x.Actors)
+                .FirstAsync(x => x.FilmId == id);
             if (film != null)
             {
                 return film;

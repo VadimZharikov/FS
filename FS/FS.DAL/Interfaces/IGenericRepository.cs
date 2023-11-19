@@ -4,7 +4,7 @@
     {
         Task<TEntity> Add(TEntity item);
         Task<IEnumerable<TEntity>> Get();
-        IEnumerable<TEntity> Get(Func<TEntity, bool> predicate);
+        Task<IEnumerable<TEntity>> Get(Func<TEntity, ValueTask<bool>> predicate);
         Task<TEntity?> GetById(int id);
         Task<TEntity> Update(TEntity item);
         Task Delete(TEntity item);
