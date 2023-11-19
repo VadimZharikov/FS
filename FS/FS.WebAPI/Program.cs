@@ -2,6 +2,7 @@ using FS.BLL.DI;
 using FS.WebAPI.DI;
 using FS.WebAPI.Middleware;
 using Serilog;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSerilogServices(new LoggerConfiguration());
+builder.Services.AddAutoMapper(Assembly.Load("FS.BLL"), Assembly.Load("FS.WebAPI"));
 builder.Services.AddBusinessLogic(builder.Configuration);
 
 var app = builder.Build();
