@@ -17,11 +17,11 @@ namespace FS.BLL.Utilities
             if (filmId > 0)
             {
                 var film = await filmRepo.GetFilm(filmId);
-                var reviewsStars = film.Reviews.Select(x => x.Stars);
-                var reviewCount = reviewsStars.Count();
+                var reviewCount = film.Reviews.Count;
 
                 if (reviewCount <= 0) return false;
 
+                var reviewsStars = film.Reviews.Select(x => x.Stars);
                 float stars = (float)reviewsStars.Sum() / reviewCount;
                 film.Stars = (float)Math.Round(stars,2);
                 var result = await filmRepo.UpdateFilm(film);

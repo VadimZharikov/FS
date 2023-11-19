@@ -9,20 +9,20 @@ namespace FS.BLL.Services
 {
     public class ActorService : IActorService
     {
-        private IActorRepository actorRepo;
+        private IActorRepository _actorRepo;
         private IMapper _mapper;
         private ILogger<ActorService> _logger;
 
-        public ActorService(IActorRepository _actor, IMapper mapper, ILogger<ActorService> logger)
+        public ActorService(IActorRepository actor, IMapper mapper, ILogger<ActorService> logger)
         {
-            this.actorRepo = _actor;
+            this._actorRepo = actor;
             this._mapper = mapper;
             _logger = logger;
         }
 
         public async Task<bool> AddActor(Actor actor)
         {
-            var result = await this.actorRepo.AddActor(_mapper.Map<Actor, ActorEntity>(actor));
+            var result = await this._actorRepo.AddActor(_mapper.Map<Actor, ActorEntity>(actor));
             if (result.ActorId > 0)
             {
                 _logger.LogInformation($"Actor {result.ActorId} - {result.ActorName} was added");
@@ -33,13 +33,13 @@ namespace FS.BLL.Services
 
         public async Task<List<Actor>> GetActors()
         {
-            List<Actor> actors = _mapper.Map<List<ActorEntity>, List<Actor>>(await actorRepo.GetActors());
+            List<Actor> actors = _mapper.Map<List<ActorEntity>, List<Actor>>(await _actorRepo.GetActors());
             return actors;
         }
 
         public async Task<Actor> GetActor(int id)
         {
-            Actor newActor = _mapper.Map<ActorEntity, Actor>(await actorRepo.GetActor(id));
+            Actor newActor = _mapper.Map<ActorEntity, Actor>(await _actorRepo.GetActor(id));
             return newActor;
         }
 
@@ -50,7 +50,7 @@ namespace FS.BLL.Services
                 return false;
             }
 
-            var result = await this.actorRepo.UpdateActor(_mapper.Map<Actor, ActorEntity>(actor));
+            var result = await this._actorRepo.UpdateActor(_mapper.Map<Actor, ActorEntity>(actor));
             if (result.ActorId > 0)
             {
                 _logger.LogInformation($"Actor {result.ActorId} - {result.ActorName} was updated");
@@ -61,7 +61,7 @@ namespace FS.BLL.Services
 
         public async Task<bool> DeleteActor(int id)
         {
-            var result = await actorRepo.DeleteActor(id);
+            var result = await _actorRepo.DeleteActor(id);
             if (result.ActorId > 0)
             {
                 _logger.LogInformation($"Actor {result.ActorId} - {result.ActorName} was deleted");
