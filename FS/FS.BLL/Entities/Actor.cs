@@ -5,5 +5,6 @@
         #nullable disable
         public int ActorId { get; set; }
         public string ActorName { get; set; }
+        public List<Film> Films { get; set; }
     }
 }

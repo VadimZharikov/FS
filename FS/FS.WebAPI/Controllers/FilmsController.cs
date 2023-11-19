@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using FS.BLL.Entities;
 using FS.BLL.Interfaces;
-using FS.WebAPI.Models;
+using FS.WebAPI.Models.Film;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FS.WebAPI.Controllers
@@ -18,15 +18,15 @@ namespace FS.WebAPI.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/<FilmsController>
+        // GET: api/<FilmsController>/5
         [HttpGet("{id}")]
-        public async Task<FilmViewModel> GetFilm(int id)
+        public async Task<FilmFullViewModel> GetFilm(int id)
         {
-            var film = _mapper.Map<Film, FilmViewModel>(await filmService.GetFilm(id));
+            var film = _mapper.Map<Film, FilmFullViewModel>(await filmService.GetFilm(id));
             return film;
         }
 
-        // GET api/<FilmsController>/5
+        // GET api/<FilmsController>
         [HttpGet]
         public async Task<List<FilmViewModel>> GetFilms()
         {

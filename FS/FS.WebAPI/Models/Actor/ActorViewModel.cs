@@ -1,4 +1,6 @@
-﻿namespace FS.WebAPI.Models
+﻿using FS.WebAPI.Models.Film;
+
+namespace FS.WebAPI.Models.Actor
 {
     public class ActorViewModel
     {

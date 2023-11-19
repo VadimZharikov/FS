@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using FS.BLL.Entities;
 using FS.BLL.Interfaces;
-using FS.WebAPI.Models;
+using FS.WebAPI.Models.Review;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FS.WebAPI.Controllers
@@ -18,15 +18,15 @@ namespace FS.WebAPI.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/<ReviewsController>
+        // GET: api/<ReviewsController>/5
         [HttpGet("{id}")]
-        public async Task<ReviewViewModel> GetReview(int id)
+        public async Task<ReviewFullViewModel> GetReview(int id)
         {
-            var review = _mapper.Map<Review, ReviewViewModel>(await reviewService.GetReview(id));
+            var review = _mapper.Map<Review, ReviewFullViewModel>(await reviewService.GetReview(id));
             return review;
         }
 
-        // GET api/<ReviewsController>/5
+        // GET api/<ReviewsController>
         [HttpGet]
         public async Task<List<ReviewViewModel>> GetReviews()
         {

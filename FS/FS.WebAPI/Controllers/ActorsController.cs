@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using FS.BLL.Entities;
 using FS.BLL.Interfaces;
-using FS.WebAPI.Models;
+using FS.WebAPI.Models.Actor;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FS.WebAPI.Controllers
@@ -18,15 +18,15 @@ namespace FS.WebAPI.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/<ActorsController>
+        // GET: api/<ActorsController>/5
         [HttpGet("{id}")]
-        public async Task<ActorViewModel> GetActor(int id)
+        public async Task<ActorFullViewModel> GetActor(int id)
         {
-            var actor = _mapper.Map<Actor, ActorViewModel>(await actorService.GetActor(id));
+            var actor = _mapper.Map<Actor, ActorFullViewModel>(await actorService.GetActor(id));
             return actor;
         }
 
-        // GET api/<ActorsController>/5
+        // GET api/<ActorsController>
         [HttpGet]
         public async Task<List<ActorViewModel>> GetActors()
         {

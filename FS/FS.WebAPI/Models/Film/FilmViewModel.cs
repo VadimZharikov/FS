@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace FS.WebAPI.Models
+﻿namespace FS.WebAPI.Models.Film
 {
     public class FilmViewModel
     {
