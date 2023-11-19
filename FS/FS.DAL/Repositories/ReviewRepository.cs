@@ -24,7 +24,9 @@ namespace FS.DAL.Repositories
 
         public async Task<ReviewEntity> GetReview(int id)
         {
-            var review = await _context.Reviews.FindAsync(id);
+            var review = await _context.Reviews
+            .Include(x => x.Film)
+            .FirstAsync(x => x.ReviewId == id);
             if (review != null)
             {
                 return review;

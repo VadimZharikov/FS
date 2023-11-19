@@ -11,9 +11,7 @@ namespace FS.DAL.DI
     {
         public static void AddDataRepository(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<DatabaseContext>(op => 
-            op.UseLazyLoadingProxies()
-            .UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DatabaseContext>(op => op.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IFilmRepository, FilmRepository>();
             services.AddScoped<IActorRepository, ActorRepository>();
             services.AddScoped<IReviewRepository, ReviewRepository>();

@@ -10,7 +10,7 @@ namespace FS.DAL.Entities
         public string Title { get; set; }
         public string Description { get; set; }
         public int Stars {  get; set; }
-        public virtual FilmEntity Film { get; set; }
+        public FilmEntity Film { get; set; }
         public int FilmId {  get; set; }
 
     }
