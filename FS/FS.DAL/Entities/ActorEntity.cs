@@ -8,6 +8,6 @@ namespace FS.DAL.Entities
         [Key]
         public int ActorId {  get; set; }
         public string ActorName { get; set; }
-        public List<FilmEntity> Films { get; set; }
+        public virtual List<FilmEntity> Films { get; set; }
     }
 }

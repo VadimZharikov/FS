@@ -8,8 +8,8 @@ namespace FS.DAL.Entities
         [Key]
         public int FilmId { get; set; }
         public string Title { get; set; }
-        public double Stars { get; set; } = 0.0;
-        public List<ActorEntity> Actors { get; set; }
-        public List<ReviewEntity> Reviews { get; set; }
+        public float Stars { get; set; }
+        public virtual List<ActorEntity> Actors { get; set; }
+        public virtual List<ReviewEntity> Reviews { get; set; }
     }
 }
