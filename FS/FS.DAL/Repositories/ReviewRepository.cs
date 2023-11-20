@@ -26,7 +26,7 @@ namespace FS.DAL.Repositories
         {
             var review = await _context.Reviews
             .Include(x => x.Film)
-            .FirstAsync(x => x.ReviewId == id);
+            .FirstOrDefaultAsync(x => x.ReviewId == id);
             if (review != null)
             {
                 return review;
