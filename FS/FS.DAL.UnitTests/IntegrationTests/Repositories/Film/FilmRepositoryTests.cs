@@ -7,7 +7,7 @@ namespace FS.DAL.UnitTests.IntegrationTests.Repositories.Film
     public class FilmRepositoryTests
     {
         private readonly DbContextOptions<DatabaseContext> _options;
-        private FilmRepository _repository;
+        private FilmRepository? _repository;
 
         public FilmRepositoryTests()
         {
@@ -217,8 +217,7 @@ namespace FS.DAL.UnitTests.IntegrationTests.Repositories.Film
         {
             await using DatabaseContext context = new(_options);
             _repository = new(context);
-
-            await _repository.AddFilm(null).ShouldThrowAsync(typeof(ArgumentNullException));
+            await _repository.AddFilm(null!).ShouldThrowAsync(typeof(ArgumentNullException));
         }
 
         [Fact]

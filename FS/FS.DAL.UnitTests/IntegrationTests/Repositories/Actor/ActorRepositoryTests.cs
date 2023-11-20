@@ -7,7 +7,7 @@ namespace FS.DAL.UnitTests.IntegrationTests.Repositories.Actor
     public class ActorRepositoryTests
     {
         private readonly DbContextOptions<DatabaseContext> _options;
-        private ActorRepository _repository;
+        private ActorRepository? _repository;
 
         public ActorRepositoryTests()
         {
@@ -177,7 +177,7 @@ namespace FS.DAL.UnitTests.IntegrationTests.Repositories.Actor
             await using DatabaseContext context = new(_options);
             _repository = new(context);
 
-            await _repository.AddActor(null).ShouldThrowAsync(typeof(ArgumentNullException));
+            await _repository.AddActor(null!).ShouldThrowAsync(typeof(ArgumentNullException));
         }
 
         [Fact]

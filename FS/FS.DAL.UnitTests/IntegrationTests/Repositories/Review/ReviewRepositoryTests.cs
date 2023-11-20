@@ -7,7 +7,7 @@ namespace FS.DAL.UnitTests.IntegrationTests.Repositories.Review
     public class ReviewRepositoryTests
     {
         private readonly DbContextOptions<DatabaseContext> _options;
-        private ReviewRepository _repository;
+        private ReviewRepository? _repository;
 
         public ReviewRepositoryTests()
         {
@@ -181,7 +181,7 @@ namespace FS.DAL.UnitTests.IntegrationTests.Repositories.Review
             await using DatabaseContext context = new(_options);
             _repository = new(context);
 
-            await _repository.AddReview(null).ShouldThrowAsync(typeof(ArgumentNullException));
+            await _repository.AddReview(null!).ShouldThrowAsync(typeof(ArgumentNullException));
         }
 
         [Fact]
