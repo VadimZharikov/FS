@@ -1,10 +1,7 @@
-﻿using AutoMapper;
-using FS.BLL.Entities;
+﻿using FS.BLL.Entities;
 using FS.BLL.Services;
 using FS.DAL.Entities;
 using FS.DAL.Interfaces;
-using Microsoft.Extensions.Logging;
-using Moq;
 
 namespace FS.BLL.UnitTests.Services.Reviews
 {
