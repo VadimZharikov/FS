@@ -26,7 +26,7 @@ namespace FS.DAL.Repositories
         {
             var actor = await _context.Actors
             .Include(x => x.Films)
-            .FirstAsync(x => x.ActorId == id);
+            .FirstOrDefaultAsync(x => x.ActorId == id);
             if (actor != null)
             {
                 return actor;
