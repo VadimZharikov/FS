@@ -1,0 +1,18 @@
+﻿services:
+  ms-sql-server:
+   image: mcr.microsoft.com/mssql/server:2022-latest
+   environment:
+    ACCEPT_EULA: "Y"
+    SA_PASSWORD: "test@123"
+    MSSQL_PI: Express
+   ports:
+    - 1433:1433
+  fswebapi:
+   build: .
+   environment:
+    DOTNET_ENVIRONMENT: "Development"
+    TZ: "Europe/Moscow"
+    ConnectionStrings:DefaultConnection: "Server=ms-sql-server,1433\\SQLExpress;Database=FS;User=SA;Password=test@123;MultipleActiveResultSets=True;TrustServerCertificate=true"
+   ports:
+   - 5500:8080
+   - 5501:8081
