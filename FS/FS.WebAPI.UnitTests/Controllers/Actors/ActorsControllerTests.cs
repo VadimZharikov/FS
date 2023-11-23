@@ -15,7 +15,7 @@ namespace FS.WebAPI.UnitTests.Controllers.Actors
         public async Task Post_HasData_ReturnsTrue()
         {
             var ActorId = new Random().Next();
-            var ActorViewModel = new ActorViewModel()
+            var ActorViewModel = new ActorFullViewModel()
             {
                 ActorId = ActorId,
                 ActorName = "Boba"
@@ -26,9 +26,9 @@ namespace FS.WebAPI.UnitTests.Controllers.Actors
                 ActorName = ActorViewModel.ActorName
             };
 
-            _mapperMock.Setup(map => map.Map<ActorViewModel, Actor>(ActorViewModel)).Returns(inputActorModel);
-            _mapperMock.Setup(map => map.Map<Actor, ActorViewModel>(inputActorModel)).Returns(ActorViewModel);
-            _serviceMock.Setup(serv => serv.AddActor(_mapperMock.Object.Map<ActorViewModel, Actor>(ActorViewModel)))
+            _mapperMock.Setup(map => map.Map<ActorFullViewModel, Actor>(ActorViewModel)).Returns(inputActorModel);
+            _mapperMock.Setup(map => map.Map<Actor, ActorFullViewModel>(inputActorModel)).Returns(ActorViewModel);
+            _serviceMock.Setup(serv => serv.AddActor(_mapperMock.Object.Map<ActorFullViewModel, Actor>(ActorViewModel)))
                 .ReturnsAsync(true);
 
             var controller = new ActorsController(_serviceMock.Object, _mapperMock.Object);
@@ -94,7 +94,7 @@ namespace FS.WebAPI.UnitTests.Controllers.Actors
         public async Task Put_ValidId_ReturnsTrue()
         {
             var ActorId = new Random().Next();
-            var ActorViewModel = new ActorViewModel()
+            var ActorViewModel = new ActorFullViewModel()
             {
                 ActorId = ActorId,
                 ActorName = "Boba"
@@ -105,8 +105,8 @@ namespace FS.WebAPI.UnitTests.Controllers.Actors
                 ActorName = ActorViewModel.ActorName
             };
 
-            _mapperMock.Setup(map => map.Map<Actor, ActorViewModel>(ActorModel)).Returns(ActorViewModel);
-            _mapperMock.Setup(map => map.Map<ActorViewModel, Actor>(ActorViewModel)).Returns(ActorModel);
+            _mapperMock.Setup(map => map.Map<Actor, ActorFullViewModel>(ActorModel)).Returns(ActorViewModel);
+            _mapperMock.Setup(map => map.Map<ActorFullViewModel, Actor>(ActorViewModel)).Returns(ActorModel);
             _serviceMock.Setup(serv => serv.PutActor(ActorId, ActorModel))
                 .ReturnsAsync(true);
 
