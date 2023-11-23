@@ -36,17 +36,17 @@ namespace FS.WebAPI.Controllers
 
         // POST api/<FilmsController>
         [HttpPost]
-        public async Task<bool> Post(FilmViewModel film)
+        public async Task<bool> Post(FilmAddUpdateViewModel film)
         {
-            bool result = await filmService.AddFilm(_mapper.Map<FilmViewModel, Film>(film));
+            bool result = await filmService.AddFilm(_mapper.Map<FilmAddUpdateViewModel, Film>(film));
             return result;
         }
 
         // PUT api/<FilmsController>/5
         [HttpPut("{id}")]
-        public async Task<bool> Put(int id, FilmViewModel film)
+        public async Task<bool> Put(int id, FilmAddUpdateViewModel film)
         {
-            bool result = await filmService.PutFilm(id, _mapper.Map<FilmViewModel, Film>(film));
+            bool result = await filmService.PutFilm(id, _mapper.Map<FilmAddUpdateViewModel, Film>(film));
             return result;
         }
 

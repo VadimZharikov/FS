@@ -15,11 +15,12 @@ namespace FS.DAL.Repositories
             this._context = dbContext;
         }
 
-        public async Task<ActorEntity> AddActor(ActorEntity newActor)
+        public async Task<ActorEntity> AddActor(ActorEntity actor)
         {
-            await _context.Actors.AddAsync(newActor);
+            _context.Films.AttachRange(actor.Films);
+            await _context.Actors.AddAsync(actor);
             await _context.SaveChangesAsync();
-            return newActor;
+            return actor;
         }
 
         public async Task<ActorEntity> GetActor(int id)
@@ -58,7 +59,18 @@ namespace FS.DAL.Repositories
 
         public async Task<ActorEntity> UpdateActor(ActorEntity actor)
         {
-            _context.Entry(actor).State = EntityState.Modified;
+            var dbActor = _context.Actors
+                .Include(f => f.Films)
+                .First(f => f.ActorId == actor.ActorId);
+            //remove unused films
+            dbActor.Films
+                .RemoveAll(a => !actor.Films
+                    .Exists(x => x.FilmId == a.FilmId));
+            //store new films
+            actor.Films.RemoveAll(a => dbActor.Films
+                            .Exists(x => x.FilmId == a.FilmId));
+
+            dbActor.Films.AddRange(actor.Films);
             await _context.SaveChangesAsync();
             return actor;
         }

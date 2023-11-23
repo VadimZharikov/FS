@@ -14,7 +14,9 @@ namespace FS.WebAPI.Mapper
             CreateMap<FilmViewModel, Film>();
             CreateMap<FilmFullViewModel, Film>();
             CreateMap<Film, FilmFullViewModel>();
-
+            CreateMap<Film, FilmAddUpdateViewModel>();
+            CreateMap<FilmAddUpdateViewModel, Film>();
+            
             CreateMap<Actor, ActorViewModel>();
             CreateMap<ActorViewModel, Actor>();
             CreateMap<ActorFullViewModel, Actor>();

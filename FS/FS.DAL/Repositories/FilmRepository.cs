@@ -3,6 +3,9 @@ using FS.DAL.Entities;
 using FS.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using FS.DAL.Constants;
+using Microsoft.IdentityModel.Tokens;
+using System.Linq;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace FS.DAL.Repositories
 {
@@ -15,11 +18,12 @@ namespace FS.DAL.Repositories
             this._context = dbContext;
         }
 
-        public async Task<FilmEntity> AddFilm(FilmEntity newFilm)
+        public async Task<FilmEntity> AddFilm(FilmEntity film)
         {
-            await _context.Films.AddAsync(newFilm);
+            _context.Actors.AttachRange(film.Actors);
+            await _context.Films.AddAsync(film);
             await _context.SaveChangesAsync();
-            return newFilm;
+            return film;
         }
 
         public async Task<FilmEntity> GetFilm(int id)
@@ -59,7 +63,18 @@ namespace FS.DAL.Repositories
 
         public async Task<FilmEntity> UpdateFilm(FilmEntity film)
         {
-            _context.Entry(film).State = EntityState.Modified;
+            var dbFilm = _context.Films
+                .Include(f => f.Actors)
+                .First(f => f.FilmId == film.FilmId);
+            //remove unused actors
+            dbFilm.Actors
+                .RemoveAll(a => !film.Actors
+                    .Exists(x => x.ActorId == a.ActorId));
+            //store new actors
+            film.Actors.RemoveAll(a => dbFilm.Actors
+                            .Exists(x => x.ActorId == a.ActorId));
+
+            dbFilm.Actors.AddRange(film.Actors);
             await _context.SaveChangesAsync();
             return film;
         }

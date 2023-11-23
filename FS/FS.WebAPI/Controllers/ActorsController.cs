@@ -36,17 +36,17 @@ namespace FS.WebAPI.Controllers
 
         // POST api/<ActorsController>
         [HttpPost]
-        public async Task<bool> Post(ActorViewModel actor)
+        public async Task<bool> Post(ActorFullViewModel actor)
         {
-            bool result = await actorService.AddActor(_mapper.Map<ActorViewModel, Actor>(actor));
+            bool result = await actorService.AddActor(_mapper.Map<ActorFullViewModel, Actor>(actor));
             return result;
         }
 
         // PUT api/<ActorsController>/5
         [HttpPut("{id}")]
-        public async Task<bool> Put(int id, ActorViewModel actor)
+        public async Task<bool> Put(int id, ActorFullViewModel actor)
         {
-            bool result = await actorService.PutActor(id, _mapper.Map<ActorViewModel, Actor>(actor));
+            bool result = await actorService.PutActor(id, _mapper.Map<ActorFullViewModel, Actor>(actor));
             return result;
         }
 
